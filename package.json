@@ -1,0 +1,36 @@
+{
+  "name": "upcdatabase-graphql",
+  "version": "0.0.0",
+  "description": "GraphQL translation for the UPC Database at http://upcdatabase.org/",
+  "license": "MIT",
+  "repository": "blindman/upcdatabase-graphql",
+  "author": {
+    "name": "blindman",
+    "email": "jon.heller02@gmail.com"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "test": "xo && ava",
+    "graphiql": "node server.js"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    ""
+  ],
+  "dependencies": {
+    "graphql": "^0.9.6",
+    "node-fetch": "^1.6.3"
+  },
+  "devDependencies": {
+    "ava": "^0.17.0",
+    "casual-browserify": "^1.5.12",
+    "express": "^4.15.3",
+    "express-graphql": "^0.6.5",
+    "graphql-tools": "^0.11.0",
+    "xo": "^0.17.0"
+  }
+}
