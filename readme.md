@@ -43,4 +43,4 @@ npm test
 
 ## License
 
-MIT © [blindman](https://github.com/blindman)
+MIT © [Jon Heller](https://github.com/blindman)
