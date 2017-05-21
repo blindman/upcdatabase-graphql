@@ -32,7 +32,7 @@ const dbMock = mockServer(testingSchema, {
 });
 
 const successQuery = dbMock.query(`{
-		item(apiKey: "7d9a207f5cec532d3dce99488087d5f3", upc: "0111222333446") {
+		item(apiKey: "a20087d54899d9f57cec532d3dce87f3", upc: "0111222333446") {
 			valid,
 			reason,
 			number,
@@ -123,7 +123,7 @@ noAPIKeyQuery.then(({data, errors}) => {
 });
 
 const noUPCQuery = dbMock.query(`{
-		item(apiKey: "7d9a207f5cec532d3dce99488087d5f3") {
+		item(apiKey: "a20087d54899d9f57cec532d3dce87f3") {
 			valid,
 			reason,
 			number,
