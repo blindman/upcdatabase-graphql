@@ -12,7 +12,7 @@ const ENDPOINT_URL = 'http://api.upcdatabase.org/json/';
  * @return {Item}           	The item that was queried
  */
 function fetchResponseByItem(apiKey, upc) {
-	return fetch(`${ENDPOINT_URL}${apiKey}/${upc}`).then(response => response.json());
+	return fetch(`${ENDPOINT_URL}${apiKey}/${upc}`);
 }
 
 const ItemType = new gql.GraphQLObjectType({
@@ -31,28 +31,23 @@ const ItemType = new gql.GraphQLObjectType({
 		},
 		reason: {
 			type: gql.GraphQLString,
-			description: 'Explains why the request was not valid',
-			resolve: item => item.reason
+			description: 'Explains why the request was not valid'
 		},
 		number: {
 			type: gql.GraphQLString,
-			description: 'The UPC value sent with the request',
-			resolve: item => item.number
+			description: 'The UPC value sent with the request'
 		},
 		itemName: {
 			type: gql.GraphQLString,
-			description: 'The name of the requested item',
-			resolve: item => item.itemname
+			description: 'The name of the requested item'
 		},
 		alias: {
 			type: gql.GraphQLString,
-			description: 'Another name for the requested item',
-			resolve: item => item.alias
+			description: 'Another name for the requested item'
 		},
 		description: {
 			type: gql.GraphQLString,
-			description: 'A description of the requested item',
-			resolve: item => item.description
+			description: 'A description of the requested item'
 		},
 		avgPrice: {
 			type: gql.GraphQLString,
@@ -91,7 +86,7 @@ module.exports = {
 						description: 'The UPC of the item your are requesting'
 					}
 				},
-				resolve: (root, args) => fetchResponseByItem(args.apiKey, args.upc)
+				resolve: (root, args) => fetchResponseByItem(args.apiKey, args.upc).then(response => response.json())
 			}
 		})
 	})

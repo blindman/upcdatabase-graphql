@@ -2,7 +2,17 @@ import {mockServer} from 'graphql-tools';
 import test from 'ava';
 import {GraphQLSchema} from 'graphql';
 import casual from 'casual-browserify';
+import rewire from 'rewire';
 import upcDatabase from '.';
+
+const rewiredUpcDatabase = rewire('.');
+const fetchResponseByItem = rewiredUpcDatabase.__get__('fetchResponseByItem');
+
+test('fetchResponseByItem', t => {
+	fetchResponseByItem('098f6bcd4621d373cade4e832627b4f6', '0111222333446').then(response => {
+		t.truthy(response.json().data, '\'data\' object not present on successful response');
+	});
+});
 
 const testingSchema = new GraphQLSchema({query: upcDatabase.ItemQuery});
 const dbMock = mockServer(testingSchema, {
