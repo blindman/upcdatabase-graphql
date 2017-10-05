@@ -1,4 +1,4 @@
-# upcdatabase-graphql [![Build Status](https://travis-ci.org/blindman/upcdatabase-graphql.svg?branch=master)](https://travis-ci.org/blindman/upcdatabase-graphql)
+# upcdatabase-graphql [![Build Status](https://travis-ci.org/blindman/upcdatabase-graphql.svg?branch=master)](https://travis-ci.org/blindman/upcdatabase-graphql) [![codecov](https://codecov.io/gh/blindman/upcdatabase-graphql/badge.svg?branch=master)](https://codecov.io/gh/blindman/upcdatabase-graphql?branch=master)
 
 > GraphQL translation for the UPC Database at http://upcdatabase.org/
 
