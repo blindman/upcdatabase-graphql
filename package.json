@@ -1,6 +1,6 @@
 {
   "name": "upcdatabase-graphql",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "GraphQL translation for the UPC Database at http://upcdatabase.org/",
   "license": "MIT",
   "repository": "blindman/upcdatabase-graphql",
