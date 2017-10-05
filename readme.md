@@ -2,8 +2,14 @@
 
 > GraphQL translation for the UPC Database at http://upcdatabase.org/
 
+*NOTE*: Currently supports v2 of the UPC Database API
+
 
 ## Install
+
+```
+$ yarn add upcdatabase-graphql
+```
 
 ```
 $ npm install --save upcdatabase-graphql
@@ -32,13 +38,13 @@ graphQL(schema, query).then((result) => { console.log(result); });
 #### GraphiQL
 
 ```
-npm run graphiql
+yarn run graphiql
 ```
 
 #### Automated
 
 ```
-npm test
+yarn test
 ```
 
 ## License

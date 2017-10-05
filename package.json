@@ -19,7 +19,9 @@
     "index.js"
   ],
   "keywords": [
-    ""
+    "upcdatabase.org",
+    "upcdatabase",
+    "upc"
   ],
   "dependencies": {
     "graphql": "^0.9.6",
