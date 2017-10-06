@@ -16,6 +16,18 @@ function fetchResponseByItem(apiKey, upc) {
 }
 
 /**
+ * Returns the validity of the retrieved item
+ * @param  {Object} item
+ * @return {String|Boolean}
+ */
+function itemValidityResolver(item) {
+	if (item.valid === false || item.valid === 'false') {
+		throw new Error(item.reason);
+	}
+	return item.valid;
+}
+
+/**
  * Resolves the field when snake case is requird
  * @param  {Object} item
  * @param  {Object} args
@@ -38,12 +50,7 @@ const ItemType = new gql.GraphQLObjectType({
 		valid: {
 			type: gql.GraphQLString,
 			description: 'Indicates whether the request was valid',
-			resolve: item => {
-				if (item.valid === false || item.valid === 'false') {
-					throw new Error(item.reason);
-				}
-				return item.valid;
-			}
+			resolve: itemValidityResolver
 		},
 		reason: {
 			type: gql.GraphQLString,

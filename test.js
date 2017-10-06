@@ -7,12 +7,27 @@ import upcDatabase from '.';
 
 const rewiredUpcDatabase = rewire('.');
 const fetchResponseByItem = rewiredUpcDatabase.__get__('fetchResponseByItem');
+const itemValidityResolver = rewiredUpcDatabase.__get__('itemValidityResolver');
 const snakeCaseResolver = rewiredUpcDatabase.__get__('snakeCaseResolver');
 
 test('fetchResponseByItem', t => {
 	fetchResponseByItem('098f6bcd4621d373cade4e832627b4f6', '0111222333446').then(response => {
 		t.truthy(response.json().data, '\'data\' object not present on successful response');
 	});
+});
+
+test('itemValidityResolver', t => {
+	t.is(itemValidityResolver({valid: true}), true);
+
+	const boolError = t.throws(() => {
+		itemValidityResolver({valid: false, reason: 'Error reason - boolean'});
+	}, Error);
+	t.is(boolError.message, 'Error reason - boolean');
+
+	const stringError = t.throws(() => {
+		itemValidityResolver({valid: 'false', reason: 'Error reason - string'});
+	}, Error);
+	t.is(stringError.message, 'Error reason - string');
 });
 
 test('snakeCaseResolver', t => {
