@@ -7,11 +7,21 @@ import upcDatabase from '.';
 
 const rewiredUpcDatabase = rewire('.');
 const fetchResponseByItem = rewiredUpcDatabase.__get__('fetchResponseByItem');
+const snakeCaseResolver = rewiredUpcDatabase.__get__('snakeCaseResolver');
 
 test('fetchResponseByItem', t => {
 	fetchResponseByItem('098f6bcd4621d373cade4e832627b4f6', '0111222333446').then(response => {
 		t.truthy(response.json().data, '\'data\' object not present on successful response');
 	});
+});
+
+test('snakeCaseResolver', t => {
+	t.is(snakeCaseResolver({avg_price: '1234'}, null, null, {fieldName: 'avgPrice'}), '1234'); // eslint-disable-line camelcase
+	t.is(snakeCaseResolver({avg_price: '1234'}, null, null, {fieldName: 'avg_price'}), '1234'); // eslint-disable-line camelcase
+	t.is(snakeCaseResolver({rate_up: '1234'}, null, null, {fieldName: 'rateUp'}), '1234'); // eslint-disable-line camelcase
+	t.is(snakeCaseResolver({rate_up: '1234'}, null, null, {fieldName: 'rate_up'}), '1234'); // eslint-disable-line camelcase
+	t.is(snakeCaseResolver({rate_down: '1234'}, null, null, {fieldName: 'rateDown'}), '1234'); // eslint-disable-line camelcase
+	t.is(snakeCaseResolver({rate_down: '1234'}, null, null, {fieldName: 'rate_down'}), '1234'); // eslint-disable-line camelcase
 });
 
 const testingSchema = new GraphQLSchema({query: upcDatabase.ItemQuery});

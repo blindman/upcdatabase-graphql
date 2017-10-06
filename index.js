@@ -15,6 +15,22 @@ function fetchResponseByItem(apiKey, upc) {
 	return fetch(`${ENDPOINT_URL}${apiKey}/${upc}`);
 }
 
+/**
+ * Resolves the field when snake case is requird
+ * @param  {Object} item
+ * @param  {Object} args
+ * @param  {Object} context
+ * @param  {String} options.fieldName
+ * @return {*}
+ */
+function snakeCaseResolver(item, args, context, {fieldName}) {
+	const fieldNameAsArray = fieldName.split(/(?=[A-Z])/);
+	const camelCaseFieldName = fieldNameAsArray.reduce((final, curr, idx) => {
+		return idx === 0 ? curr : `${final}_${curr.toLowerCase()}`;
+	}, '');
+	return item[camelCaseFieldName];
+}
+
 const ItemType = new gql.GraphQLObjectType({
 	name: 'Item',
 	description: 'Information about the item requested using its UPC',
@@ -52,17 +68,17 @@ const ItemType = new gql.GraphQLObjectType({
 		avgPrice: {
 			type: gql.GraphQLString,
 			description: 'The average price of the item',
-			resolve: item => item.avg_price
+			resolve: snakeCaseResolver
 		},
 		rateUp: {
 			type: gql.GraphQLString,
 			description: 'The number of users who rated this item entry positively',
-			resolve: item => item.rate_up
+			resolve: snakeCaseResolver
 		},
 		rateDown: {
 			type: gql.GraphQLString,
 			description: 'The number of users who rated this item entry negatively',
-			resolve: item => item.rate_down
+			resolve: snakeCaseResolver
 		}
 	})
 });
