@@ -32,11 +32,11 @@ function itemValidityResolver(item) {
  * @param  {Object} item
  * @param  {Object} args
  * @param  {Object} context
- * @param  {String} options.fieldName
+ * @param  {String} info
  * @return {*}
  */
-function snakeCaseResolver(item, args, context, {fieldName}) {
-	const fieldNameAsArray = fieldName.split(/(?=[A-Z])/);
+function snakeCaseResolver(item, args, context, info) {
+	const fieldNameAsArray = info.fieldName.split(/(?=[A-Z])/);
 	const camelCaseFieldName = fieldNameAsArray.reduce((final, curr, idx) => {
 		return idx === 0 ? curr : `${final}_${curr.toLowerCase()}`;
 	}, '');
